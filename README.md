@@ -1,5 +1,9 @@
-To run this project clone the given repo and run ###`npm install`
+# Calendar Application with React and Supabase
 
+To run this project clone the given repo and run `npm install`
+
+This is a calender application made using reactJs with tailwind along side supabase as database provider.
+In this project I have added functionalities like to create,edit and delete events based on dates like google calender.
 
 # Getting Started with Create React App
 
