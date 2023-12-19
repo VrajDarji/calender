@@ -4,19 +4,24 @@ import { useModal } from "./hooks/useModal";
 
 function App({
   setCurrentMonth,
+  selectedMonth,
 }: {
   setCurrentMonth: React.Dispatch<React.SetStateAction<string>>;
+  selectedMonth: string;
 }) {
   const date = new Date();
   const ref = useRef<HTMLDivElement | null>(null);
   const { onOpen } = useModal();
 
-  const scrollToDiv = () => {
-    const div = document.getElementById(months[date.getMonth()].tag);
-    ref.current?.scrollTo({
-      top: div?.offsetTop,
-      behavior: "smooth",
-    });
+  const scrollToDiv = (divId: string) => {
+    const div = document.getElementById(divId);
+    const additionHeight = 65;
+    if (div) {
+      ref.current?.scrollTo({
+        top: div?.offsetTop - additionHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleScroll = () => {
@@ -27,14 +32,18 @@ function App({
   };
 
   useEffect(() => {
-    scrollToDiv();
+    scrollToDiv(months[date.getMonth()].tag);
     ref.current?.addEventListener("scroll", handleScroll);
     const a = ref.current;
     return () => {
       a?.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  useEffect(() => {
+    if (selectedMonth) {
+      scrollToDiv(selectedMonth);
+    }
+  }, [selectedMonth]);
   return (
     <>
       <div className="grid grid-cols-7 absolute w-full h-[8vh] z-10 bg-white">
