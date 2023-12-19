@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import { months } from "../data/data";
-import { Ban, MoreVertical, Trash } from "lucide-react";
+import { Ban, Trash } from "lucide-react";
 
 const Sidebar = () => {
   const date = new Date();
@@ -29,6 +29,7 @@ const Sidebar = () => {
       if (data !== null) {
         setEvents(data);
       }
+      //   data extraction from supabase database
     } catch (err) {
       console.error(err);
     }
@@ -41,6 +42,7 @@ const Sidebar = () => {
         .update({
           done: !done,
         })
+        // updated done status
         .eq("id", id)
         .select("*");
 
@@ -69,7 +71,7 @@ const Sidebar = () => {
     getData();
   });
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
       <h1 className="font-medium text-xl pb-2 text-center border-b-2">
         Today&apos;s Events
       </h1>

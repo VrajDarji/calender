@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
 import Sidebar from "./Sidebar";
 import { months } from "../data/data";
@@ -11,15 +11,18 @@ const MainLayout = () => {
   );
   const [selectedMonth, setSelectedMonth] = useState("");
   return (
-    <div className="w-full h-[100vh] fixed flex flex-col">
+    <div className="w-full h-screen fixed flex flex-col">
       <div className="w-full h-[10vh] border-b-2 px-5 flex flex-row items-center bg-slate-100/70 justify-between">
         <Nav currentMonth={currentMonth} selectedMonth={setSelectedMonth} />
       </div>
       <div className="flex relative flex-row w-full h-[90vh]">
-        <div className="absolute top-0 left-0 h-full w-[20vw] border-r p-4">
+        <div className="hidden absolute md:flex top-0 left-0 h-full w-[20vw] border-r p-4">
           <Sidebar />
         </div>
-        <div className="absolute right-0 h-[90vh] w-[80vw]">
+        <div
+          className="
+          relative md:absolute w-[100vw] right-0 h-[90vh] md:w-[80vw]"
+        >
           <App
             setCurrentMonth={setCurrentMonth}
             selectedMonth={selectedMonth}

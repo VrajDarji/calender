@@ -22,6 +22,7 @@ function App({
         behavior: "smooth",
       });
     }
+    // Scrolling functionality to current month
   };
 
   const handleScroll = () => {
@@ -50,7 +51,7 @@ function App({
         {days.map((day) => (
           <p
             key={day}
-            className={`h-full w-full flex justify-center items-center text-xl font-semibold py-2 border-2 border-white border-r-0 bg-slate-400/50 ${
+            className={`h-full w-full flex justify-center items-center text-sm overflow-clip md:text-xl font-semibold py-2 border-2 border-white border-r-0 bg-slate-400/50 ${
               day === "Sunday" ? "text-rose-600" : ""
             }`}
           >
