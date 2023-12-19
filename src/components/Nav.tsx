@@ -26,10 +26,10 @@ const Nav = ({
         </button>
         <div className="absolute z-20 top-[3rem] right-0">
           {dialog && (
-            <div className="h-[30vh] w-[9vw] bg-white rounded-md py-3 flex flex-col gap-1 overflow-scroll">
+            <div className="h-[30vh] w-[9vw] bg-white rounded-md py-3 px-1 flex flex-col gap-1 overflow-scroll shadow-md">
               {months.map((month) => (
                 <p
-                  className="cursor-pointer py-1 px-3 hover:bg-slate-100/70"
+                  className="cursor-pointer py-1 px-3 hover:bg-slate-100/70 rounded-sm"
                   onClick={() => {
                     selectedMonth(month.tag);
                     setDialog(false);

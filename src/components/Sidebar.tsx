@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import { months } from "../data/data";
-import { Ban } from "lucide-react";
+import { Ban, MoreVertical, Trash } from "lucide-react";
 
 const Sidebar = () => {
   const date = new Date();
@@ -16,6 +16,8 @@ const Sidebar = () => {
       }[]
     | null
   >(null);
+  const [dialog, setDialog] = useState(false);
+  const [dialogId, setDialogId] = useState<number>();
   const getData = async () => {
     try {
       const { data } = await supabase
@@ -36,8 +38,6 @@ const Sidebar = () => {
 
   const updateEvent = async (id: number, done: boolean | null) => {
     try {
-      console.log({ id, done });
-
       const { data, error } = await supabase
         .from("Events")
         .update({
@@ -56,7 +56,17 @@ const Sidebar = () => {
       console.error(err);
     }
   };
-
+  const deleteEvent = async (id: number) => {
+    try {
+      const { error } = await supabase.from("Events").delete().eq("id", id);
+      if (error) {
+        console.log(error);
+      }
+      getData();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
     getData();
   }, []);
@@ -71,23 +81,46 @@ const Sidebar = () => {
             return (
               <div
                 key={event.id}
-                className="flex flex-row gap-2 text-lg items-center jusstarttify- font-normal cursor-pointer"
+                className="flex flex-row gap-2 text-lg items-center justify-between font-normal cursor-pointer"
               >
-                <button
-                  className={`p-[.35rem] border-2 border-black rounded-sm ${
-                    event.done ? `bg-indigo-400` : ``
-                  }`}
-                  onClick={() => {
-                    updateEvent(event.id, event.done);
-                  }}
-                ></button>
-                <p
-                  className={`capitalize tracking-wide ${
-                    event.done ? `line-through` : ``
-                  }`}
-                >
-                  {event.event}
-                </p>
+                <div className="flex flex-row gap-1 items-center ">
+                  <button
+                    className={`p-[.35rem] border-2 border-black rounded-sm ${
+                      event.done ? `bg-indigo-400` : ``
+                    }`}
+                    onClick={() => {
+                      updateEvent(event.id, event.done);
+                    }}
+                  ></button>
+                  <p
+                    className={`capitalize tracking-wide ${
+                      event.done ? `line-through` : ``
+                    }`}
+                  >
+                    {event.event}
+                  </p>
+                </div>
+                <div className="relative">
+                  <button
+                    onClick={() => {
+                      setDialog((prev) => !prev);
+                      setDialogId(event.id);
+                    }}
+                  >
+                    <MoreVertical className="h-4 w-4" />
+                  </button>
+                  {dialog && dialogId === event.id && (
+                    <div className="absolute right-4 top-0 bg-white rounded-md shadow-md px-3 py-2 hover:bg-slate-100/70">
+                      <button
+                        className="flex flex-row justify-center items-center "
+                        onClick={() => deleteEvent(dialogId)}
+                      >
+                        <Trash className="mr-2 h-4 w-4 text-rose-600" />
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
