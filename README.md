@@ -1,3 +1,12 @@
+# Calendar Application with React and Supabase
+
+To run this project clone the given repo and run `npm install`
+
+This is a calender application made using reactJs with tailwind along side supabase as database provider.
+In this project I have added functionalities like to create,edit and delete events based on dates like google calender.
+
+site Live [Link](https://calender-inky.vercel.app/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
