@@ -16,8 +16,6 @@ const Sidebar = () => {
       }[]
     | null
   >(null);
-  const [dialog, setDialog] = useState(false);
-  const [dialogId, setDialogId] = useState<number>();
   const getData = async () => {
     try {
       const { data } = await supabase
@@ -100,26 +98,14 @@ const Sidebar = () => {
                     {event.event}
                   </p>
                 </div>
-                <div className="relative">
+                <div className="relative flex items-center">
                   <button
                     onClick={() => {
-                      setDialog((prev) => !prev);
-                      setDialogId(event.id);
+                      deleteEvent(event.id);
                     }}
                   >
-                    <MoreVertical className="h-4 w-4" />
+                    <Trash className="h-4 w-4 text-red-600" />
                   </button>
-                  {dialog && dialogId === event.id && (
-                    <div className="absolute right-4 top-0 bg-white rounded-md shadow-md px-3 py-2 hover:bg-slate-100/70">
-                      <button
-                        className="flex flex-row justify-center items-center "
-                        onClick={() => deleteEvent(dialogId)}
-                      >
-                        <Trash className="mr-2 h-4 w-4 text-rose-600" />
-                        Delete
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
             );
