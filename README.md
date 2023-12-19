@@ -1,3 +1,6 @@
+To run this project clone the given repo and run ###`npm install`
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
