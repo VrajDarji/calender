@@ -67,7 +67,7 @@ const Sidebar = () => {
   };
   useEffect(() => {
     getData();
-  }, []);
+  });
   return (
     <div className="flex flex-col gap-2">
       <h1 className="font-medium text-xl pb-2 text-center border-b-2">

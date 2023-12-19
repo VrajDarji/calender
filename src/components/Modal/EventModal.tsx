@@ -34,7 +34,6 @@ const EventModal = () => {
       console.log(data);
       setInput("");
       onClose();
-      window.location.reload();
     } catch (err) {
       console.error(err);
     } finally {
